@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="-1.0" layoutY="55.0" prefHeight="346.0" prefWidth="600.0" style="-fx-background-color: grey;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="LendingTab" text="Lending/receiving">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="22.0" layoutY="93.0" prefHeight="200.0" prefWidth="270.0" style="-fx-background-color: white;">
+                           <children>
+                              <TextField fx:id="ItemCodeTf" layoutX="22.0" layoutY="34.0" promptText="Item code" />
+                              <TextField fx:id="MemberIdentifierTf" layoutX="22.0" layoutY="75.0" promptText="Member identifier" />
+                              <Button fx:id="LendItemBtn" layoutX="22.0" layoutY="127.0" mnemonicParsing="false" onAction="#LendItemClick" style="-fx-background-color: blue;" text="Lend item" textFill="WHITE" />
+                              <Label fx:id="ErrorLend" layoutX="22.0" layoutY="104.0" textFill="RED" />
+                           </children></Pane>
+                        <Pane layoutX="314.0" layoutY="93.0" prefHeight="200.0" prefWidth="270.0" style="-fx-background-color: white;">
+                           <children>
+                              <TextField fx:id="CodeItemTf" layoutX="25.0" layoutY="35.0" promptText="Item code" />
+                              <Button fx:id="ReceiveItemBtn" layoutX="25.0" layoutY="83.0" mnemonicParsing="false" onAction="#ReceiveItem" style="-fx-background-color: blue;" text="Receive item" textFill="WHITE" />
+                              <Label fx:id="ErrorReceive" layoutX="25.0" layoutY="65.0" textFill="RED" />
+                              <Label fx:id="LateLabel" layoutX="25.0" layoutY="111.0" />
+                           </children></Pane>
+                        <Label fx:id="welcomeLabel" layoutX="31.0" layoutY="29.0" text="Welcome[name of user]" textFill="#fffafa">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab onSelectionChanged="#CollectionTab" style="fx-background-color: white;" text="Collection">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane fx:id="AddItemPane" prefHeight="323.0" prefWidth="600.0" style="-fx-background-color: grey;">
+                           <children>
+                               <TextField fx:id="TitlePaneTf" layoutX="45.0" layoutY="172.0" promptText="Title" />
+                               <TextField fx:id="AuthorPaneTf" layoutX="45.0" layoutY="102.0" promptText="Author" />
+                              <Button fx:id="AddItemAddBtn" layoutX="45.0" layoutY="258.0" mnemonicParsing="false" onAction="#AddItemAddClick" style="-fx-background-color: blue;" text="Add Item" textFill="WHITE" />
+                              <Button fx:id="AddItemCancelBtn" layoutX="134.0" layoutY="258.0" mnemonicParsing="false" onAction="#AddItemCancelClick" text="Cancel" />
+                              <Label layoutX="45.0" layoutY="14.0" text="Add Item">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="ItemsPane" prefHeight="317.0" prefWidth="600.0" style="-fx-background-color: grey;">
+                           <children>
+                              <Label layoutX="14.0" layoutY="7.0" text="Items" textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="AddItemBtn" layoutX="14.0" layoutY="271.0" mnemonicParsing="false" onAction="#AddItemClick" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: blue;" text="Add Item" textFill="WHITE" />
+                              <Button fx:id="EditItemBtn" layoutX="123.0" layoutY="271.0" mnemonicParsing="false" onAction="#EditItemClick" prefHeight="25.0" prefWidth="85.0" text="Edit item" />
+                              <Button fx:id="DeleteItemBtn" layoutX="238.0" layoutY="271.0" mnemonicParsing="false" onAction="#DeleteItemClick" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: red;" text="Delete item" textFill="WHITE" />
+                              <TableView fx:id="ItemTv" layoutX="7.0" layoutY="42.0" prefHeight="209.0" prefWidth="569.0">
+                                <columns>
+                                    <TableColumn fx:id="ItemCodeColumn" prefWidth="75.0" text="Item code">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="id" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="AvailableItemColumn" prefWidth="75.0" text="Available">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="available" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="TitleItemColumn" prefWidth="75.0" text="Title">
+                                      <cellValueFactory>
+                                        <PropertyValueFactory property="title" />
+                                      </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="AuthorItemColumn" prefWidth="75.0" text="Author">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="author" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+
+                                </columns>
+                              </TableView>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="EditItemPane" prefHeight="318.0" prefWidth="600.0" style="-fx-background-color: grey;">
+                           <children>
+                              <Button fx:id="EditItemEditBtn" layoutX="37.0" layoutY="257.0" mnemonicParsing="false" onAction="#EditItemEditBtn" style="-fx-background-color: blue;" text="Edit Item" textFill="WHITE" />
+                              <Button fx:id="CancelEditBtn" layoutX="136.0" layoutY="257.0" mnemonicParsing="false" onAction="#CancelEditClick" text="Cancel" />
+                              <TextField fx:id="EditTitleTf" layoutX="37.0" layoutY="78.0" promptText="Title" />
+                              <TextField fx:id="EditAuthorTf" layoutX="37.0" layoutY="142.0" promptText="Author" />
+                              <Label layoutX="37.0" layoutY="30.0" text="Edit Item" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab onSelectionChanged="#MemberTab" style="fx-background-color: white;" text="Members">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                         <Pane fx:id="AddMemberPane" layoutX="1.0" layoutY="-4.0" prefHeight="319.0" prefWidth="600.0" style="-fx-background-color: grey;">
+                             <children>
+                                   <TextField fx:id="AddMemberFirstnameTb" layoutX="14.0" layoutY="72.0" promptText="First name" />
+                                   <TextField fx:id="AddMemberLastnameTb" layoutX="14.0" layoutY="160.0" promptText="Last name" />
+                                   <DatePicker fx:id="AddMemberBirthdate" layoutX="260.0" layoutY="72.0" promptText="Birth date" />
+                                 <Button fx:id="AddMemberAddBtn" layoutX="14.0" layoutY="272.0" mnemonicParsing="false" onAction="#AddMemberAddClick" style="-fx-background-color: Blue;" text="Add Member" textFill="WHITE" />
+                                 <Button fx:id="AddMemberCancelBtn" layoutX="115.0" layoutY="272.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
+                                 <Label layoutX="14.0" layoutY="14.0" text="Add Member" textFill="WHITE">
+                                     <font>
+                                         <Font size="24.0" />
+                                     </font>
+                                 </Label>
+                             </children>
+                         </Pane>
+                        <Pane fx:id="MemberPane" layoutY="3.0" prefHeight="312.0" prefWidth="600.0" style="-fx-background-color: grey;">
+                           <children>
+                              <Label layoutX="12.0" layoutY="14.0" text="Member" textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="AddMemberBtn" layoutX="14.0" layoutY="273.0" mnemonicParsing="false" onAction="#AddMemberClick" style="-fx-background-color: blue;" text="Add Member" />
+                              <Button fx:id="EditMemberBtn" layoutX="119.0" layoutY="273.0" mnemonicParsing="false" onAction="#EditMemberClick" text="Edit Member" />
+                              <Button fx:id="DeleteMemberBtn" layoutX="224.0" layoutY="273.0" mnemonicParsing="false" onAction="#DeleteMemberBtnClick" style="-fx-background-color: Red;" text="Delete Button" />
+                              <TableView fx:id="MemberTv" layoutX="19.0" layoutY="41.0" prefHeight="200.0" prefWidth="561.0">
+                                <columns>
+                                    <TableColumn prefWidth="75.0" text="Member ID">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="id" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn prefWidth="75.0" text="Firstname">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="firstname" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn prefWidth="75.0" text="Lastname">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="lastname" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn prefWidth="75.0" text="Birthdate">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="birthdate" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                </columns>
+                              </TableView>
+
+                           </children>
+                        </Pane>
+                           <Pane fx:id="EditMemberPane" prefHeight="318.0" prefWidth="600.0" style="-fx-background-color: grey;">
+                           <children>
+                              <Button fx:id="EditMemberEditBtn" layoutX="31.0" layoutY="261.0" mnemonicParsing="false" onAction="#EditMemberEditClick" style="-fx-background-color: blue;" text="Edit Member" textFill="WHITE" />
+                              <Button fx:id="EditMemberCancel" layoutX="139.0" layoutY="261.0" mnemonicParsing="false" onAction="#EditMemberCancelClick" text="Cancel" />
+                              <Label layoutX="31.0" layoutY="30.0" text="Edit Member" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="EditMemberFirstnameTb" layoutX="31.0" layoutY="70.0" promptText="Firstname" />
+                              <TextField fx:id="EditMemberLastnameTb" layoutX="31.0" layoutY="134.0" promptText="Lastname" />
+                              <DatePicker fx:id="EditMemberBirthdate" layoutX="255.0" layoutY="70.0" promptText="Birthdate" />
+                           </children></Pane>
+
+                     </children></AnchorPane>
+                </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="69.0" layoutY="20.0" text="Library system" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
